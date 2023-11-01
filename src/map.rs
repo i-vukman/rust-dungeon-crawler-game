@@ -1,9 +1,6 @@
-use bracket_lib::terminal::{to_cp437, BTerm, Point, BLACK, WHITE};
+use bracket_lib::terminal::Point;
 
-use crate::{
-    camera::Camera,
-    prelude::{SCREEN_HEIGHT, SCREEN_WIDTH},
-};
+use crate::prelude::{SCREEN_HEIGHT, SCREEN_WIDTH};
 
 const NUM_TILES: usize = (SCREEN_WIDTH * SCREEN_HEIGHT) as usize;
 
@@ -25,37 +22,6 @@ impl Map {
     pub fn new() -> Self {
         Self {
             tiles: vec![TileType::Floor; NUM_TILES],
-        }
-    }
-
-    pub fn render(&self, ctx: &mut BTerm, camera: &Camera) {
-        ctx.set_active_console(0);
-        for y in camera.top_y..camera.bottom_y {
-            for x in camera.left_x..camera.right_x {
-                if self.in_bounds(Point::new(x, y)) {
-                    let idx = map_idx(x, y);
-                    match self.tiles[idx] {
-                        TileType::Floor => {
-                            ctx.set(
-                                x - camera.left_x,
-                                y - camera.top_y,
-                                WHITE,
-                                BLACK,
-                                to_cp437('.'),
-                            );
-                        }
-                        TileType::Wall => {
-                            ctx.set(
-                                x - camera.left_x,
-                                y - camera.top_y,
-                                WHITE,
-                                BLACK,
-                                to_cp437('#'),
-                            );
-                        }
-                    }
-                }
-            }
         }
     }
 
