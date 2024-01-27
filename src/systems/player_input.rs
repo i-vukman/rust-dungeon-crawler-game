@@ -1,10 +1,10 @@
 use crate::prelude::*;
 
 #[system]
-#[write_component(Point)]
 #[read_component(Player)]
 #[read_component(Enemy)]
-#[read_component(Health)]
+#[write_component(Health)]
+#[write_component(Point)]
 pub fn player_input(
     ecs: &mut SubWorld,
     commands: &mut CommandBuffer,
