@@ -1,8 +1,10 @@
 mod automata;
+mod drunkard;
 mod empty;
 mod rooms;
 
 use crate::map_builder::automata::CellularAutomataArchitect;
+use crate::map_builder::drunkard::DrunkardsWalkArchitect;
 use crate::map_builder::empty::EmptyArchitect;
 use crate::map_builder::rooms::RoomsArchitect;
 use crate::prelude::*;
@@ -23,7 +25,7 @@ pub struct MapBuilder {
 
 impl MapBuilder {
     pub fn new(rng: &mut RandomNumberGenerator) -> Self {
-        let mut architect = CellularAutomataArchitect {};
+        let mut architect = DrunkardsWalkArchitect {};
         architect.new(rng)
     }
 
@@ -132,7 +134,7 @@ impl MapBuilder {
             .collect::<Vec<Point>>();
 
         let mut spawns = Vec::new();
-        for _ in 0 .. NUM_MONSTERS {
+        for _ in 0..NUM_MONSTERS {
             let target_index = rng.random_slice_index(&spawnable_tiles).unwrap();
             spawns.push(spawnable_tiles[target_index].clone());
             spawnable_tiles.remove(target_index);
