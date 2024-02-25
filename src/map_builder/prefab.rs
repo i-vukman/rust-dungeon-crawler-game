@@ -41,7 +41,7 @@ pub fn apply_prefab(mb: &mut MapBuilder, rng: &mut RandomNumberGenerator) {
         dimensions.for_each(|pt| {
             let idx = mb.map.point2d_to_index(pt);
             let distance = dijkstra_map.map[idx];
-            if distance < 2000.0 && distance > 20.0 && mb.amulet_start != pt {
+            if distance < 2000.0 && distance > 20.0 && mb.most_distant_point != pt {
                 can_place = true;
             }
         });

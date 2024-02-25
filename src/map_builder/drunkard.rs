@@ -39,7 +39,7 @@ impl MapArchitect for DrunkardsWalkArchitect {
             rooms: Vec::new(),
             monster_spawns: Vec::new(),
             player_start: Point::zero(),
-            amulet_start: Point::zero(),
+            most_distant_point: Point::zero(),
             theme: super::themes::DungeonTheme::new(),
         };
         mb.fill(TileType::Wall);
@@ -75,7 +75,7 @@ impl MapArchitect for DrunkardsWalkArchitect {
         }
         mb.monster_spawns = mb.spawn_monsters(&center, rng);
         mb.player_start = center;
-        mb.amulet_start = mb.find_most_distant();
+        mb.most_distant_point = mb.find_most_distant();
         mb
     }
 }
